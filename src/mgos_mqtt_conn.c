@@ -634,6 +634,8 @@ void mgos_mqtt_conn_sub(struct mgos_mqtt_conn *c, const char *topic, int qos,
 bool mgos_mqtt_conn_unsub(struct mgos_mqtt_conn *c, const char *topic) {
   struct mgos_mqtt_subscription *s;
 
+  if (c == NULL) return false;
+
   SLIST_FOREACH(s, &c->subscriptions, next) {
     if (0 == mg_vcmp(&s->topic, topic)) {
       LOG(LL_INFO,
